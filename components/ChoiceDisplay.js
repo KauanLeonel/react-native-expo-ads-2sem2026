@@ -14,12 +14,13 @@ export default function ChoiceDisplay({ escolha, onPress }) {
 const styles = StyleSheet.create({
 
     item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#b8abbb',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 12,
     alignItems: 'center',
+    borderRadius: 20,
   },
 
   image: {

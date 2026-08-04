@@ -24,27 +24,56 @@ const DATA = [
   },
 ];
 
+function gerarNumeroIntervalo(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 export default function App() {
   const [choice, setChoice] = useState(DATA[0]);
 
   function escolherOpcao(opcao) {
     setChoice(opcao);
-  }
-  return (
-    <View style={styles.main}>
-      <View style={styles.game}>
-        <View style={styles.choice}>
-          <Image source={choice.imagem}
-            style={{
-              width: 80,
-              height: 80,
-            }} />
-          <Text style={styles.title}>Sua escolha: {choice.title}</Text>
 
-        </View>
-        <View style={styles.options}>
-          <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
+    const numeroAleatorio = gerarNumeroIntervalo(0, 2);
+    setOponentChoice(DATA[numeroAleatorio]);
+  }
+
+  const [oponent_Choice, setOponentChoice] = useState(DATA[0]);
+
+  function opcaoInimigo(opcao) {
+    setOponentChoice(opcao);
+  }
+
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.main}>
+
+
+
+          <View style={styles.game}>
+            <View style={styles.oponent}>
+              <Image source={oponent_Choice.imagem}
+                style={{
+                  width: 80,
+                  height: 80,
+
+                }} />
+              <Text style={styles.title}>Escolha do oponente: {oponent_Choice.title}</Text>
+            </View>
+            <View style={styles.choice}>
+              <Image source={choice.imagem}
+                style={{
+                  width: 80,
+                  height: 80,
+
+                }} />
+              <Text style={styles.title}>Sua escolha: {choice.title}</Text>
+
+            </View>
+            <View style={styles.options}>
+
               <Text style={styles.title}>
                 Escolha uma opção
               </Text>
@@ -52,7 +81,7 @@ export default function App() {
                 data={DATA}
                 renderItem={({ item }) => (
                   <ChoiceDisplay escolha={item}
-                  onPress={() => escolherOpcao(item)}
+                    onPress={() => escolherOpcao(item)}
                   />
                 )}
                 keyExtractor={item => item.id}
@@ -60,12 +89,13 @@ export default function App() {
 
               />
 
-            </SafeAreaView>
-          </SafeAreaProvider>
-        </View>
-      </View>
 
-    </View>
+            </View>
+          </View>
+
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -75,17 +105,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#15171a',
 
   },
+  oponent: {
+    backgroundColor: '#5a5359',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    flex: 3
+  },
   options: {
-    flex: 4
+    flex: 4,
   },
   choice: {
-    flex: 1,
+    flex: 3,
     alignItems: 'center',
-    backgroundColor: '#a16594',
+    backgroundColor: '#443e44',
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
-    backgroundColor: '#c58bbb',
+    backgroundColor: '#5a5359',
   },
 
   heading: {
@@ -123,6 +161,10 @@ const styles = StyleSheet.create({
   },
 
   game: {
-    padding: '5%'
-  }
+    padding: '5%',
+    borderRadius: 20,
+    flex: 1
+
+  },
+
 });
