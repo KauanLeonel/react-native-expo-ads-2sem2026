@@ -2,24 +2,26 @@ import { SafeAreaProvider, SafeAreaView, } from 'react-native-safe-area-context'
 import { StyleSheet, Text, View, FlatList, Pressable, Alert, } from 'react-native';
 import { Image } from 'react-native';
 import { useState } from 'react';
-import ChoiceDisplay from './components/ChoiceDisplay';
+import ChoiceDisplay from '../../components/ChoiceDisplay';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import {useRouter} from 'expo-router'
 
 const DATA = [
   {
     id: '0',
     title: 'Pedra',
-    imagem: require('./assets/pedra.png')
+    imagem: require('../../assets/pedra.png')
   },
   {
     id: '1',
     title: 'Papel',
-    imagem: require('./assets/papel.png')
+    imagem: require('../../assets/papel.png')
 
   },
   {
     id: '2',
     title: 'Tesoura',
-    imagem: require('./assets/tesoura.png')
+    imagem: require('../../assets/tesoura.png')
 
   },
 ];
@@ -45,11 +47,12 @@ export default function App() {
     setOponentChoice(opcao);
   }
 
+  const router = useRouter();
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.main}>
-
+                <AntDesign name="rollback" size={24} color="white" onPress={() => router.push('/')}/>
 
 
           <View style={styles.game}>
@@ -60,7 +63,7 @@ export default function App() {
                   height: 80,
 
                 }} />
-              <Text style={styles.title}>Escolha do oponente: {oponent_Choice.title}</Text>
+              <Text style={styles.title}>Oponente: {oponent_Choice.title}</Text>
             </View>
             <View style={styles.choice}>
               <Image source={choice.imagem}
